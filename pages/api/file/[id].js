@@ -20,14 +20,12 @@ const handler = nc()
         const fileRoute = path.join("/", dirRelativeToPublicFolder, filename);
 
         const kmlFile = new DOMParser().parseFromString(
-          fs.readFileSync('./public' + fileRoute, "utf8")
+          fs.readFileSync("./public" + fileRoute, "utf8")
         );
 
-        const geoJsonGenerated = kml.kml(kmlFile)
+        const geoJsonGenerated = kml(kmlFile);
 
-        console.log(geoJsonGenerated);
-      
-        res.status(200).json({ files: fileRoute });
+        res.status(200).json(geoJsonGenerated);
       } else {
         res.status(404).json({});
       }
